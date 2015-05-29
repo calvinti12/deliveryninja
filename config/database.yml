@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: delivery_ninja
+
+test:
+  <<: *default
+  database: delivery_ninja_test
+
+production:
+  <<: *default
+  database: delivery_ninja_production
