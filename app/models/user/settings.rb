@@ -1,0 +1,5 @@
+module User::Settings
+  REQUIRED_REFERRALS = 2
+  MAX_REFERRALS = 5
+  REFERRAL_PERIOD = 7
+end

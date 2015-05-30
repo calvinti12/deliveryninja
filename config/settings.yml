@@ -1,0 +1,10 @@
+########## REFERRAL SETTINGS #########
+# Require referrals to use the service
+referrals_required: true
+
+# define rate at which users can send referrals
+max_referrals_per_period: 5
+period_length: 7 # number of days
+
+
+
