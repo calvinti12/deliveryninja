@@ -1,5 +1,8 @@
 class CommunicationController < ApplicationController
-  def receive(phone = "555-555-5555",message= "hello world")
+  skip_before_filter  :verify_authenticity_token
+  def receive()
+    phone = params[:phone]
+    message = params[:msg]
     user = User.find_or_create_by(:phone => phone)
     communication = Communication.new(user,message)
     if user.admin?

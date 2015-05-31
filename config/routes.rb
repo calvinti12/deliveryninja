@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'communication/receive'
   get 'communication/receive'
 
   # The priority is based upon order of creation: first created -> highest priority.

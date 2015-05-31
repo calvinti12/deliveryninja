@@ -43,4 +43,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_admins
+    self.where(:admin => true)
+  end
+
 end
