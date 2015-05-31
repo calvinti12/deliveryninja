@@ -1,5 +1,5 @@
 class Communication
-  def initialize(from,msg)
+  def initialize(from_user,msg)
     @from = from
     @msg = msg
   end
@@ -7,20 +7,22 @@ class Communication
   def check_user_message
     case @msg
     when /^referral/
-      p "I am entering a referral"
+      @from.consume_referral(/referral\s(.+)/.match(@msg))
     when /^get referral$/
-      p "I want a referral"
+      @from.request_referral
     else
       p "I am placing an order"
     end
   end
+
+
 
   def check_admin_message
     case @msg
     when /nuke all/
       p "nuke all the things"
     when /^get referral$/
-      p "admin wants a referral"
+      @from.request_referral
     when /^\REPLY #\d+/
       p "admin replying to someone"
     when /close/

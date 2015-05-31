@@ -3,13 +3,24 @@ class User < ActiveRecord::Base
   has_many :referrals
 
   def request_referral
-    #if user can give referrals
-    #if user has not sent out too many referrals
-    referral = Referral.create!(
-      :code => "#{(0...8).map { (65 + rand(26)).chr }.join}",
-      :created_by => self.phone
-    )
-    referral.code
+    if referrals_available
+      referral = Referral.create!(
+        :code => "#{(0...8).map { (65 + rand(26)).chr }.join}",
+        :created_by => self.phone
+      )
+      referral.code
+    else
+      "too many referrals have been sent recently"
+    end
+  end
+
+  def referrals_available
+    return true if self.admin?
+    return false unless self.admitted?
+    if Referrals.where(:created_by => self.phone).where("created_at >=?", Time.zone.now.beginning_of_day-REFERRAL_PERIOD).count >= MAX_REFERRALS
+      false
+    end
+    
   end
 
   def consume_referral(code)
@@ -22,15 +33,13 @@ class User < ActiveRecord::Base
   end
 
   def check_admission
+    return true if self.admitted?
     current_referrals = Referral.where(:consumed_by => self.phone).count 
-    p current_referrals
-    p "hello worldddddddd"
     if current_referrals >= REQUIRED_REFERRALS
       self.admitted = true
       self.save
-    else
-      self.admitted = false
-      self.save
+      #TODO
+      p "TODO: MESSAGE USER YAY YOU ARE ADMITTED"
     end
   end
 

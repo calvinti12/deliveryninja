@@ -8,7 +8,8 @@
 #
 User.create(
   :phone => "555-555-5555",
-  :admin => true
+  :admin => true,
+  :admitted => true
 )
 
 User.create(
