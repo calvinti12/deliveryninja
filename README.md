@@ -2,13 +2,20 @@
 open source text-based anonymized delivery service
 
 
+#### Forward
+
+I've got no tests. I've got no views. I've barely got any config. 
+
+But it's a start. 
+
+
 ###GETTING STARTED
 
 1) Bundle install
 
 2) Migrate and Seed that DB
 
-3) Rails S
+3) rails s
 
 
 ### Testing out what's already here
