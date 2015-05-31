@@ -13,18 +13,25 @@ class User < ActiveRecord::Base
   end
 
   def consume_referral(code)
+    return "user already admitted" if self.admitted?
     referral = Referral.where(:code => code).last
-    return false unless referral.consumed_by.nil?
+    return "referral already taken" unless referral.consumed_by.nil?
     referral.consumed_by = "#{self.phone}"
     referral.save
+    self.check_admission
   end
 
-  def admitted?
-    if self.referrals_received.nil?
-      false
+  def check_admission
+    current_referrals = Referral.where(:consumed_by => self.phone).count 
+    p current_referrals
+    p "hello worldddddddd"
+    if current_referrals >= REQUIRED_REFERRALS
+      self.admitted = true
+      self.save
     else
-      self.referrals_received >= REQUIRED_REFERRALS 
+      self.admitted = false
+      self.save
     end
   end
-  
+
 end
