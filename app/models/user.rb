@@ -39,7 +39,9 @@ class User < ActiveRecord::Base
       self.admitted = true
       self.save
       #TODO
-      p "TODO: MESSAGE USER YAY YOU ARE ADMITTED"
+      return "MESSAGE USER YAY YOU ARE ADMITTED"
+    elsif current_referrals > 0
+      return "You still need #{ REQUIRED_REFERRALS - current_referrals} to enter"
     end
   end
 
