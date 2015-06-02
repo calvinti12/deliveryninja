@@ -7,7 +7,6 @@ class Communication
   def check_user_message
     case @msg
     when /^referral/
-      message = 
       @from.consume_referral(/referral\s(.+)/.match(@msg)[1])
     when /^get referral$/
       @from.request_referral
