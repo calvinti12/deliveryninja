@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
   def consume_referral(code)
     return "user already admitted" if self.admitted?
-    referral = Referral.where(:code => code).last
+    referral = Referral.where(:code => code).first
     return "referral already taken" unless referral.consumed_by.nil?
     referral.consumed_by = "#{self.phone}"
     referral.save

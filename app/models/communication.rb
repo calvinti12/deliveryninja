@@ -7,11 +7,12 @@ class Communication
   def check_user_message
     case @msg
     when /^referral/
-      @from.consume_referral(/referral\s(.+)/.match(@msg))
+      message = 
+      @from.consume_referral(/referral\s(.+)/.match(@msg)[1])
     when /^get referral$/
       @from.request_referral
     else
-      p "I am placing an order to #{User.find_admins.first.phone} with message ##{@from.id} #{@msg}"
+      self.place_order
     end
   end
 
