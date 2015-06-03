@@ -7,16 +7,24 @@ class Communication
   def check_user_message
     case @msg
     when /^referral/
-      message = 
-      @from.consume_referral(/referral\s(.+)/.match(@msg)[1])
+      code = /referral\s(.+)/.match(@msg)[1]
+      r = Referral.find_by_code(code)
+      if r.consume!(@from)
+        if @from.admitted?
+          p "You are admitted"
+        else
+          p "You need more referrals"
+        end
+      else
+        p "Could not use referral"
+      end
     when /^get referral$/
-      @from.request_referral
+      request_referral
     else
       self.place_order
     end
   end
 
- 
 
   def check_admin_message
     p @msg
@@ -24,7 +32,7 @@ class Communication
     when /nuke all/
       p "nuke all the things"
     when /^get referral$/
-      @from.request_referral
+      request_referral
     when /^REPLY #\d+/
       message = /^REPLY #(\d+)\s(.+)/.match(@msg)
       p "admin replying to #{User.find(message[1]).phone} with message #{message[2]}"
@@ -37,11 +45,20 @@ class Communication
     end
   end
 
+  def request_referral
+    r = @from.request_referral
+    if r
+      p "Referral created #{r.code}"
+    else
+      p "Could not create referral"
+    end
+  end
+
   def place_order
     store_open = true #placeholder
     if @from.admitted?
       if store_open
-        p "I am placing an order to #{User.find_admins.first.phone} with message ##{@from.id} #{@msg}"
+        p "I am placing an order to #{User.admins.first.phone} with message ##{@from.id} #{@msg}"
       else
         p "We're closed, check back later"
       end

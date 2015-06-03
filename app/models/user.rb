@@ -1,50 +1,26 @@
 class User < ActiveRecord::Base
   include User::Settings
   has_many :referrals
+  has_many :consumed_referrals, foreign_key: "consumer_id", class_name: "Referral"
+
+  scope :admins, -> { where(admin: true) }
 
   def request_referral
     if referrals_available
-      referral = Referral.create!(
-        :code => "#{(0...8).map { (65 + rand(26)).chr }.join}",
-        :created_by => self.phone
-      )
-      referral.code
+      referrals.create
     else
-      "too many referrals have been sent recently"
+      nil
     end
   end
 
   def referrals_available
     return true if self.admin?
     return false unless self.admitted?
-    if Referrals.where(:created_by => self.phone).where("created_at >=?", Time.zone.now.beginning_of_day-REFERRAL_PERIOD).count >= MAX_REFERRALS
-      false
-    end
-    
+    referrals.where("created_at >= ?", Time.zone.now.beginning_of_day - REFERRAL_PERIOD).count < MAX_REFERRALS
   end
 
-  def consume_referral(code)
-    return "user already admitted" if self.admitted?
-    referral = Referral.where(:code => code).first
-    return "referral already taken" unless referral.consumed_by.nil?
-    referral.consumed_by = "#{self.phone}"
-    referral.save
-    self.check_admission
+  def admitted?
+    return true if self.admin?
+    consumed_referrals.count >= REQUIRED_REFERRALS
   end
-
-  def check_admission
-    return true if self.admitted?
-    current_referrals = Referral.where(:consumed_by => self.phone).count 
-    if current_referrals >= REQUIRED_REFERRALS
-      self.admitted = true
-      self.save
-      #TODO
-      p "TODO: MESSAGE USER YAY YOU ARE ADMITTED"
-    end
-  end
-
-  def self.find_admins
-    self.where(:admin => true)
-  end
-
 end
