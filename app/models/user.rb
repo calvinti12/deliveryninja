@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :consumed_referrals, foreign_key: "consumer_id", class_name: "Referral"
 
   scope :admins, -> { where(admin: true) }
+  scope :available, -> { where(available: true)}
 
   def request_referral
     if referrals_available

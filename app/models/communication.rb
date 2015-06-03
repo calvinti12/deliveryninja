@@ -10,7 +10,7 @@ class Communication
       code = /referral\s(.+)/.match(@msg)[1]
       r = Referral.find_by_code(code)
       if r.nil?
-        p "not a referral code"
+        p "not a referral code" # don't message submitter
         return nil 
       end
       if r.consume!(@from)
@@ -20,7 +20,7 @@ class Communication
           p "You need more referrals"
         end
       else
-        p "Could not use referral"
+        p "Could not use referral"  # don't message submitter
       end
     when /^get referral$/
       request_referral
@@ -43,8 +43,10 @@ class Communication
       message = /^REPLY #(\d+)\s(.+)/.match(@msg)
       p "admin replying to #{User.find(message[1]).phone} with message #{message[2]}"
     when /close/
+      @from.available = false
       p "admin closes store"
     when /open/
+      @from.available = true
       p "admin opens store"
     else
       p "I don't know what you want me to do."
@@ -61,9 +63,11 @@ class Communication
   end
 
   def place_order
-    store_open = true #placeholder
+    # choose a random admin for this
+    offset = rand(User.admins.available.count)
+    chosen_admin = User.admins.available.offset(offset).first
     if @from.admitted?
-      if store_open
+      unless chosen_admin.nil?
         p "I am placing an order to #{User.admins.first.phone} with message ##{@from.id} #{@msg}"
       else
         "We're closed, check back later"
