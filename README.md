@@ -15,7 +15,9 @@ But it's a start.
 
 2) Migrate and Seed that DB
 
-3) rails s
+3) Add necessary config stuff into a *.env file (more details on that later)
+
+3) run $ foreman start
 
 
 ### Testing out what's already here
