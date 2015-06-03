@@ -21,6 +21,6 @@ class User < ActiveRecord::Base
 
   def admitted?
     return true if self.admin?
-    consumed_referrals.count >= REQUIRED_REFERRALS
+    consumed_referrals.count >= REQUIRED_REFERRALS || consumed_referrals.where(:user_id => User.admins)
   end
 end
