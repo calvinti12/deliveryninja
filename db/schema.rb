@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531174500) do
+ActiveRecord::Schema.define(version: 20150602231211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,12 @@ ActiveRecord::Schema.define(version: 20150531174500) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "created_by",  null: false
-    t.string   "consumed_by"
+    t.integer  "user_id"
+    t.integer  "consumer_id"
   end
+
+  add_index "referrals", ["consumer_id"], name: "index_referrals_on_consumer_id", using: :btree
+  add_index "referrals", ["user_id"], name: "index_referrals_on_user_id", using: :btree
 
   create_table "stores", force: true do |t|
     t.boolean  "open"
@@ -35,7 +38,6 @@ ActiveRecord::Schema.define(version: 20150531174500) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",      default: false, null: false
-    t.boolean  "admitted",   default: false, null: false
   end
 
 end
