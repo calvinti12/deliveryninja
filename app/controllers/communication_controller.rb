@@ -15,7 +15,8 @@ class CommunicationController < ApplicationController
     else
       communication.check_user_message
     end
-    render :nothing => true
+    #render :nothing => true
+    render :text => "ok"
   end
 
 end
