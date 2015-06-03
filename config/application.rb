@@ -6,6 +6,13 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Twilio.configure do |config|
+  config.account_sid = ENV['TWILIO_SID']
+  config.auth_token = ENV['TWILIO_TOKEN']
+end
+
+@twilio_client = Twilio::REST::Client.new
+
 module Deliveryservice
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
