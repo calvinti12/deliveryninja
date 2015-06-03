@@ -43,10 +43,10 @@ class Communication
       message = /^REPLY #(\d+)\s(.+)/.match(@msg)
       p "admin replying to #{User.find(message[1]).phone} with message #{message[2]}"
     when /close/
-      @from.available = false
+      @from.change_available(false)
       p "admin closes store"
     when /open/
-      @from.available = true
+      @from.change_available(true)
       p "admin opens store"
     else
       p "I don't know what you want me to do."

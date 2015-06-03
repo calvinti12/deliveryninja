@@ -24,4 +24,9 @@ class User < ActiveRecord::Base
     return true if self.admin?
     consumed_referrals.count >= REQUIRED_REFERRALS || consumed_referrals.where(:user_id => User.admins)
   end
+
+  def change_available(value)
+    self.available = value
+    self.save
+  end
 end
