@@ -9,6 +9,10 @@ class Communication
     when /^referral/
       code = /referral\s(.+)/.match(@msg)[1]
       r = Referral.find_by_code(code)
+      if r.nil?
+        p "not a referral code"
+        return nil 
+      end
       if r.consume!(@from)
         if @from.admitted?
           p "You are admitted"
