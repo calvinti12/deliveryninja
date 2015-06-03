@@ -21,7 +21,8 @@ class Communication
     when /^get referral$/
       request_referral
     else
-      self.place_order
+      response = self.place_order
+      p "I respond [to whom?] with #{response}" unless response.nil?
     end
   end
 
@@ -30,7 +31,8 @@ class Communication
     p @msg
     case @msg
     when /nuke all/
-      p "nuke all the things"
+      response = @from.nuke_all
+      p "I respond with #{response} about nuking"
     when /^get referral$/
       request_referral
     when /^REPLY #\d+/
@@ -60,7 +62,7 @@ class Communication
       if store_open
         p "I am placing an order to #{User.admins.first.phone} with message ##{@from.id} #{@msg}"
       else
-        p "We're closed, check back later"
+        "We're closed, check back later"
       end
     else
       # Don't send any response, this user isn't admitted
