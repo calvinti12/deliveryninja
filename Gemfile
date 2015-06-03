@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "bourbon"
+gem 'twilio-ruby'
 gem "coffee-rails", "~> 4.0.0"
 gem "haml-rails"
 gem "jquery-rails"

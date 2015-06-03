@@ -3,16 +3,18 @@ class CommunicationController < ApplicationController
   def receive()
     phone = params[:phone]
     message = params[:msg]
-    user = User.find_or_create_by(:phone => phone)
+    # make the first user an admin
+    if User.admins.count == 0
+      user = User.find_or_create_by(:phone => phone, :admin => true)
+    else
+      user = User.find_or_create_by(:phone => phone)
+    end
     communication = Communication.new(user,message)
     if user.admin?
       communication.check_admin_message 
     else
       communication.check_user_message
     end
-    #determine if msg relates to referrals 
-    #determine if user is admitted already
-    #determine if store is open 
     render :nothing => true
   end
 
