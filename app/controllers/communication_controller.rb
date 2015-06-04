@@ -1,5 +1,5 @@
 class CommunicationController < ApplicationController
-  skip_before_filter  :verify_authenticity_token
+  #skip_before_filter  :verify_authenticity_token
   def receive()
     phone = params[:phone]
     message = params[:msg]
