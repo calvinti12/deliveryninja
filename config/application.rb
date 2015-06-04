@@ -11,9 +11,6 @@ Twilio.configure do |config|
   config.auth_token = ENV['TWILIO_TOKEN']
 end
 
-@twilio_number = ENV['TWILIO_NUMBER']
-
-@twilio_client = Twilio::REST::Client.new
 
 module Deliveryservice
   class Application < Rails::Application

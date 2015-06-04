@@ -1,4 +1,7 @@
 class Communication
+  @twilio_number = ENV['TWILIO_NUMBER']
+  @twilio_client = Twilio::REST::Client.new
+
   def initialize(from,msg)
     @from = from
     @msg = msg
