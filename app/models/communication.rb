@@ -1,8 +1,7 @@
 class Communication
-  def initialize()
-
-    @from = params["From"]
-    @msg = param["Body"]
+  def initialize(from,msg)
+    @from = from
+    @msg = msg
   end
 
   def check_user_message
