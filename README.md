@@ -29,7 +29,7 @@ management stuff.
 
 ``` 
 curl -H "Content-Type: application/json" -X POST -d '{"phone":"333","msg":"hello world I am dog"}' http://localhost:3000/communication/receive
-```
+curl -H "Content-Type: application/json" -X POST -d '{"phone":"333","msg":"hello world I am dog"}' http://mighty-chamber-1443.herokuapp.com/communications/receive```
 
 ...and check out the communications controller to see all the sweet and probably
 super brittle case/switches to see what options are available.
