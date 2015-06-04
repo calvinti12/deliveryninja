@@ -55,7 +55,7 @@ class Communication
       referral = @from.request_referral
       send_sms(@from,"Share this code #{referral.code}")
     when /^REPLY #\d+/i
-      message = /^REPLY #(\d+)\s(.+)/.match(@msg)
+      message = /^REPLY #(\d+)\s(.+)/i.match(@msg)
       send_sms(User.find(message[1]).phone,message[2])
     when /^close/i
       @from.change_available(false)
