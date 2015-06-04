@@ -2,7 +2,7 @@
 
 ### What is this? 
 
-DeliveryNinja is an extremely low-cost, open-source platform for validating delivery-based business models via anonymized text-messaging. Underground delivery services are becoming increasingly common, whether they be for bento boxes, [cookies](http://www.northbynorthwestern.com/story/magazine-project-cookie-by-catherine-rolfe/), [sandwiches](http://www.northbynorthwestern.com/story/michael-wilbon-on-journalism-and-nus-mythic-sandwi/), or [more nefarious purposes](http://apps.northbynorthwestern.com/magazine/2015/spring/trailblazin/)
+DeliveryNinja is an extremely low-cost, open-source platform for validating delivery-based business models via anonymized text-messaging. Underground delivery services are becoming increasingly common, whether they be for bento boxes, [cookies](http://www.northbynorthwestern.com/story/magazine-project-cookie-by-catherine-rolfe/), [sandwiches](http://www.northbynorthwestern.com/story/michael-wilbon-on-journalism-and-nus-mythic-sandwi/), or I suppose even [more nefarious purposes](http://apps.northbynorthwestern.com/magazine/2015/spring/trailblazin/)
 
 This app allows entrepreneurs to quickly and cheaply set up the infrastructure
 necessary to test or operate a beta/MVP solely via text messaging.
@@ -12,7 +12,7 @@ This app also allows you to start with a closed beta by requiring referrals to s
 
 *Anonymized? What do you mean?*
 
-Users and admins interact solely through the twilio number, so you don't expose your mobile phone number directly to the admins (and vice versa). Admins also have the ability to destroy all records with one command, in case they determine they want to shut down their market validation and remove all data. 
+Users and admins interact solely through the twilio number, so you don't expose your mobile phone number directly to the admins (and vice versa). Admins also have the ability to destroy all records with one command, in case they determine they want to shut down their market validation and remove all data. Why? I simply didn't like the idea of a delivery person having your address, order, and phone number all at the same time. You don't know who they are, so why give them that data? 
 
 
 *What about having a menu? What about spreading the word?*
