@@ -43,8 +43,8 @@ class Communication
   end
 
   def send_sms(to,body)
-    @twilio_client.account.messages.create(
-      from: @twilio_number,
+    @@twilio_client.account.messages.create(
+      from: @@twilio_number,
       to: to.phone,
       body: body
     )
