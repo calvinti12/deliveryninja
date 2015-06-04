@@ -7,9 +7,9 @@ class Communication
 
   def check_user_message
     case @msg
-    when /^referral/
-      code = /referral\s(.+)/.match(@msg)[1]
-      r = Referral.find_by_code(code)
+    when /^referral/i
+      code = /referral\s(.+)/i.match(@msg)[1]
+      r = Referral.find_by_code(code.upcase)
       if r.nil?
         p "not a referral code" # don't message submitter
         return nil 
@@ -48,19 +48,19 @@ class Communication
   def check_admin_message
     p @msg
     case @msg
-    when /nuke all/
+    when /^nuke all/
       response = @from.nuke_all
       p "I respond with #{response} about nuking"
-    when /^get referral$/
+    when /^get referral$/i
       referral = @from.request_referral
       send_sms(@from,"Share this code #{referral.code}")
-    when /^REPLY #\d+/
+    when /^REPLY #\d+/i
       message = /^REPLY #(\d+)\s(.+)/.match(@msg)
       send_sms(User.find(message[1]).phone,message[2])
-    when /close/
+    when /^close/i
       @from.change_available(false)
       send_sms(@from.phone,"You are no longer available")
-    when /open/
+    when /^open/i
       @from.change_available(true)
       send_sms(@from.phone,"You have turned off availability")
     else
