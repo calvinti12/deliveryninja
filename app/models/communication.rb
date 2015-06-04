@@ -22,7 +22,7 @@ class Communication
       else #referral used? something else?
         p "Could not use referral"  # don't message submitter
       end
-    when /^get referral$/
+    when /^get referral$/i
       if @from.admitted?
         referral = @from.request_referral
         if referral
@@ -40,7 +40,7 @@ class Communication
   end
 
   def send_sms(to,body)
-    @twilio_client.messages.create(
+    @twilio_client.account.messages.create(
       from: @twilio_number,
       to: to.phone,
       body: body
