@@ -1,6 +1,4 @@
 class Communication
-  @twilio_number = ENV['TWILIO_NUMBER']
-  @twilio_client = Twilio::REST::Client.new
 
   def initialize(from,msg)
     @from = from
@@ -42,12 +40,8 @@ class Communication
     end
   end
 
-  def send_sms(to,body)
-    @@twilio_client.account.messages.create(
-      from: @@twilio_number,
-      to: to.phone,
-      body: body
-    )
+  def send_sms(to_user,body)
+    TwilioClient.instance.send_sms(to_user.phone,body)
   end
 
 
