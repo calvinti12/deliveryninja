@@ -1,5 +1,16 @@
 class Communication
-  def initialize(from,msg)
+  def initialize(opts)
+    p "HERE WE GOOOOOOOO"
+    p "HERE WE GOOOOOOOO"
+    p "HERE WE GOOOOOOOO"
+    p "HERE WE GOOOOOOOO"
+    p opts
+    p params
+    p "HERE WE GOOOOOOOO"
+    p "HERE WE GOOOOOOOO"
+    p "HERE WE GOOOOOOOO"
+    p "HERE WE GOOOOOOOO"
+    p "HERE WE GOOOOOOOO"
     @from = from
     @msg = msg
   end
