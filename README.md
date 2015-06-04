@@ -22,11 +22,8 @@ Not my problem. Go print your menu along with this twilio phone number on some q
 
 ### Ok, so how does it work? 
 
-Let's assume that we have three users to start with:
-
-1) An admin
-2) A person who wants to be a new user
-3) A person who is already an existing user
+Let's assume that we have three users to start with: an admin, a person who
+wants to be a new user, and a person who is already an existing user
 
 
 - EXISTING USER COMMANDS
