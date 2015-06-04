@@ -1,18 +1,8 @@
 class Communication
-  def initialize(opts)
-    p "HERE WE GOOOOOOOO"
-    p "HERE WE GOOOOOOOO"
-    p "HERE WE GOOOOOOOO"
-    p "HERE WE GOOOOOOOO"
-    p opts
-    p params
-    p "HERE WE GOOOOOOOO"
-    p "HERE WE GOOOOOOOO"
-    p "HERE WE GOOOOOOOO"
-    p "HERE WE GOOOOOOOO"
-    p "HERE WE GOOOOOOOO"
-    @from = from
-    @msg = msg
+  def initialize()
+
+    @from = params["From"]
+    @msg = param["Body"]
   end
 
   def check_user_message
