@@ -28,8 +28,8 @@ management stuff.
 * use curl to post to the one route that's set up:
 
 ``` 
-curl -H "Content-Type: application/json" -X POST -d '{"phone":"333","msg":"hello world I am dog"}' http://localhost:3000/communication/receive
-curl -H "Content-Type: application/json" -X POST -d '{"phone":"333","msg":"hello world I am dog"}' http://mighty-chamber-1443.herokuapp.com/communications/receive```
+curl -H "Content-Type: application/json" -X POST -d '{"phone":"333","msg":"hello world I am dog"}' http://localhost:5000/communication/receive
+curl -H "Content-Type: application/json" -X POST -d '{"phone":"333","msg":"hello world I am dog"}' http://mighty-chamber-1443.herokuapp.com/communication/receive```
 
 ...and check out the communications controller to see all the sweet and probably
 super brittle case/switches to see what options are available.

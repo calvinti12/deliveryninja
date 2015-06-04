@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   def admitted?
     return true if self.admin?
-    consumed_referrals.count >= REQUIRED_REFERRALS || consumed_referrals.where(:user_id => User.admins)
+    consumed_referrals.count >= REQUIRED_REFERRALS || consumed_referrals.where(:user_id => User.admins).count > 0
   end
 
   def change_available(value)

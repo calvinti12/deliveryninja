@@ -25,8 +25,10 @@ class Communication
     when /^get referral$/
       request_referral
     else
-      response = self.place_order
-      p "I respond [to whom?] with #{response}" unless response.nil?
+      if @from.admitted?
+        response = self.place_order
+        p "I respond [to whom?] with #{response}" unless response.nil?
+      end
     end
   end
 
@@ -66,14 +68,10 @@ class Communication
     # choose a random admin for this
     offset = rand(User.admins.available.count)
     chosen_admin = User.admins.available.offset(offset).first
-    if @from.admitted?
-      unless chosen_admin.nil?
-        p "I am placing an order to #{User.admins.first.phone} with message ##{@from.id} #{@msg}"
-      else
-        "We're closed, check back later"
-      end
+    unless chosen_admin.nil?
+      p "I am placing an order to #{User.admins.first.phone} with message ##{@from.id} #{@msg}"
     else
-      # Don't send any response, this user isn't admitted
+      "We're closed, check back later"
     end
   end
 
