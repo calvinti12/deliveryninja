@@ -15,21 +15,36 @@ class Communication
       end
       if r.consume!(@from)
         if @from.admitted?
-          p "You are admitted"
+          send_sms(@from,"You are now admitted")
         else
-          p "You need more referrals"
+          send_sms(@from,"You still need more referrals")
         end
-      else
+      else #referral used? something else?
         p "Could not use referral"  # don't message submitter
       end
     when /^get referral$/
-      request_referral
+      if @from.admitted?
+        referral = @from.request_referral
+        if referral
+          send_sms(@from,"Share this code #{referral.code}")
+        else
+          send_sms(@from,"Too many referrals created recently, take a break!")
+        end
+      end
     else
       if @from.admitted?
         response = self.place_order
-        p "I respond [to whom?] with #{response}" unless response.nil?
+        send_sms(response[0],response[1])
       end
     end
+  end
+
+  def send_sms(to,body)
+    @client.messages.create(
+      from: @twilio_number,
+      to: to.phone,
+      body: body
+    )
   end
 
 
@@ -40,27 +55,19 @@ class Communication
       response = @from.nuke_all
       p "I respond with #{response} about nuking"
     when /^get referral$/
-      request_referral
+      referral = @from.request_referral
+      send_sms(@from,"Share this code #{referral.code}")
     when /^REPLY #\d+/
       message = /^REPLY #(\d+)\s(.+)/.match(@msg)
-      p "admin replying to #{User.find(message[1]).phone} with message #{message[2]}"
+      send_sms(User.find(message[1]).phone,message[2])
     when /close/
       @from.change_available(false)
-      p "admin closes store"
+      send_sms(@from.phone,"You are no longer available")
     when /open/
       @from.change_available(true)
-      p "admin opens store"
+      send_sms(@from.phone,"You have turned off availability")
     else
       p "I don't know what you want me to do."
-    end
-  end
-
-  def request_referral
-    r = @from.request_referral
-    if r
-      p "Referral created #{r.code}"
-    else
-      p "Could not create referral"
     end
   end
 
@@ -68,11 +75,13 @@ class Communication
     # choose a random admin for this
     offset = rand(User.admins.available.count)
     chosen_admin = User.admins.available.offset(offset).first
+    msg = ""
     unless chosen_admin.nil?
-      p "I am placing an order to #{User.admins.first.phone} with message ##{@from.id} #{@msg}"
+      msg = "##{@from.id} #{@msg}"
     else
-      "We're closed, check back later"
+      msg = "We're closed, check back later"
     end
+    [chosen_admin,msg]
   end
 
 end
