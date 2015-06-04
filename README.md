@@ -53,7 +53,11 @@ wants to be a new user, and a person who is already an existing user
   - "reply #9 I'm here"
     (reply to user who submitted order 9 with the message "I'm here")
 
-
+### What Can I configure and where?
+    Currently, all config is in app/models/user/settings.rb. You can set.
+    - How many referrals are required to gain admittance (including 0 for public beta)
+    - Set a cap for how many referrals a user can create in the # of days specify
+    - Specify the number of days 
 
 
 #### A Brief Forward
