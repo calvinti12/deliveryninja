@@ -56,13 +56,13 @@ class Communication
       send_sms(@from,"Share this code #{referral.code}")
     when /^REPLY #\d+/i
       message = /^REPLY #(\d+)\s(.+)/i.match(@msg)
-      send_sms(User.find(message[1]).phone,message[2])
+      send_sms(User.find(message[1]),message[2])
     when /^close/i
       @from.change_available(false)
-      send_sms(@from.phone,"You are no longer available")
+      send_sms(@from,"You are no longer available")
     when /^open/i
       @from.change_available(true)
-      send_sms(@from.phone,"You have turned off availability")
+      send_sms(@from,"You have turned off availability")
     else
       p "I don't know what you want me to do."
     end
