@@ -3,7 +3,6 @@ class CommunicationController < ApplicationController
   def receive()
     phone = params["From"]
     message = params["Body"]
-    console.log "ZOMG #{params.inspect}"
     # make the first user an admin
     if User.admins.count == 0
       user = User.find_or_create_by(:phone => phone, :admin => true)
