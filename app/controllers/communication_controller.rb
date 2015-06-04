@@ -18,4 +18,8 @@ class CommunicationController < ApplicationController
     render :nothing => true
   end
 
+  def index
+    render :file => 'public/hello.html'
+  end
+
 end
