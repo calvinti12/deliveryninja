@@ -2,7 +2,7 @@
 
 ### What is this? 
 
-DeliveryNinja is an extremely low-cost, open-source platform for validating delivery-based business models via anonymized text-messaging. Underground delivery services are becoming increasingly common, whether they be for bento boxes, [cookies](http://www.northbynorthwestern.com/story/magazine-project-cookie-by-catherine-rolfe/), [sandwiches](http://www.northbynorthwestern.com/story/michael-wilbon-on-journalism-and-nus-mythic-sandwi/), or I suppose even [more nefarious purposes](http://apps.northbynorthwestern.com/magazine/2015/spring/trailblazin/)
+DeliveryNinja is an extremely low-cost, open-source platform for validating delivery-based business models via anonymized text-messaging. Underground delivery services are becoming increasingly common, whether they be for bento boxes, [cookies](http://www.northbynorthwestern.com/story/magazine-project-cookie-by-catherine-rolfe/), [sandwiches](http://www.northbynorthwestern.com/story/michael-wilbon-on-journalism-and-nus-mythic-sandwi/), or anything else.
 
 This app allows entrepreneurs to quickly and cheaply set up the infrastructure
 necessary to test or operate a beta/MVP solely via text messaging.
@@ -82,6 +82,9 @@ But it's a start.
 ### DEPLOY IN A FEW EASY STEPS! 
 
 1) Create a twilio (and get a free number) and create a heroku account. 
+
+1.5) Set the webhook for your SMS number in twilio to your heroku url e.g.
+<appname>.herokuapp.com/communication/receive
 
 2) Add the necessary twilio config to a .env file. See .env.example for the list
 of necessary data. 
