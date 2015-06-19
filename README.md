@@ -2,7 +2,7 @@
 
 ### What is this? 
 
-DeliveryNinja is an extremely low-cost, open-source platform for validating delivery-based business models via anonymized text-messaging. Underground delivery services are becoming increasingly common, whether they be for bento boxes, [cookies](http://www.northbynorthwestern.com/story/magazine-project-cookie-by-catherine-rolfe/), [sandwiches](http://www.northbynorthwestern.com/story/michael-wilbon-on-journalism-and-nus-mythic-sandwi/), or anything else.
+DeliveryNinja is an extremely low-cost, open-source platform for validating delivery-based business models via anonymized text-messaging. Delivery services are becoming increasingly common, whether they be for bento boxes, [cookies](http://www.northbynorthwestern.com/story/magazine-project-cookie-by-catherine-rolfe/), [sandwiches](http://www.northbynorthwestern.com/story/michael-wilbon-on-journalism-and-nus-mythic-sandwi/), or anything else.
 
 This app allows entrepreneurs to quickly and cheaply set up the infrastructure
 necessary to test or operate a beta/MVP solely via text messaging.
